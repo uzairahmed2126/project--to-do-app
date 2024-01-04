@@ -11,26 +11,24 @@ function handleEvent(event) {
         createElement(task);
         inputText.value = '';
     };
-
 };
-let i = 1;
 function createElement(eventValue) {
     const divEl = document.createElement('div');
     divEl.classList.add('list');
     const pEl = document.createElement('p');
-    pEl.innerText = `${i++ + "." + eventValue}`;
+    pEl.innerText = `${eventValue}`;
     const editBtn = document.createElement('button');
     editBtn.innerText = 'Edit';
     // edit event listener
     editBtn.addEventListener('click', function handleEditBtn() {
         confirm('are you sure to edit this field');
-        const task = inputText.value;
-        inputText.innerText = task;
+        inputText.innerText = 'asdf';
     })
     // delete event listener
     const deletebtn = document.createElement('button');
-    deletebtn.addEventListener('click',function handleDeleteBtn(e){
-        console.log(e)
+    deletebtn.addEventListener('click', function handleDeleteBtn(e) {
+        confirm('are you sure to delete this field');
+        divEl.remove();
     });
     deletebtn.innerText = 'Delete';
     mainContainer.append(divEl);
