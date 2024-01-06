@@ -4,7 +4,7 @@
 }
 
 body {
-    background-color: rgba(20, 3, 3, 0.829);
+    background-color: rgba(197, 112, 112, 0.452);
 }
 
 #main-container {
@@ -39,6 +39,7 @@ body {
     padding: 10px;
     align-items: center;
     gap: 10px;
+    text-transform: capitalize;
 }
 .list > button {
     padding: 5px;
