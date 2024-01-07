@@ -1,47 +1,46 @@
-const bodyEl = document.getElementsByTagName('body');
+const mainContainer = document.getElementById('main-container');
+const formEl = document.getElementById('form');
+const lists = document.querySelector('.list');
+const inputText = document.getElementById('input-text');
+function handleEvent(event) {
+    event.preventDefault();
+    const task = inputText.value;
+    if (task === '') {
+        alert("Enter Value");
+    } else {
+        createElement(task);
+        inputText.value = '';
+    };
+};
+function createElement(eventValue) {
+    const divEl = document.createElement('div');
+    divEl.classList.add('list');
+    const pEl = document.createElement('p');
+    pEl.innerText = `${eventValue}`;
+    const editBtn = document.createElement('button');
+    editBtn.innerText = 'Edit';
+    // edit event listener
+    editBtn.addEventListener('click', function handleEditBtn() {
+        let getValue = prompt("Enter Your Edit Value");
+        pEl.innerText = `${getValue}`;
 
-const mainContainer = createAndAppend('div', 'id', 'main-container', bodyEl);
-const mainForm = createAndAppend('form', 'id', 'form', mainContainer);
-let input = createAndAppend('input', 'type', 'text', mainForm);
-const submit = createAndAppend('input', 'type', 'submit', mainForm);
-
-
-
-function createAndAppend(tag, attType, attName, parent, text, event) {
-    const element = createElement(tag);
-    if (!!(attType && attName)) {
-        element.setAttribute(attType, attName)
-    }
-    if (!!parent) {
-        parent.append(element)
-    }
-    if (!!text) {
-        element.innerText = text
-    }
-    // event 
-    if (!!event) {
-        element.addEventListener(event, listsner);
-        function listsner(element) {
-            element.preventDefault();
-            element.stopPropagation();
-            if (element.type === "submit") {
-                if (e.target.classList[0] === "mainForm") {
-                    const todoContainer = createAndAppend("div", "class", "todoContainer", mainContainer);
-                    const para = createAndAppend("p", "class", "para", todoContainer, input.value);
-                    const editBtn = createAndAppend("button", "class", "editBtn", todoContainer, "Edit", "click")
-                    const deleteBtn = createAndAppend("button", "class", "deleteBtn", todoContainer, "Delete", "click")
-                }
-                if (e.target.classList[0] === "innerForm") {
-                    const inputOfInnerForm = document.querySelector(".innerFormInput")
-                    const paraOfOutput = document.querySelector(".todoContainer")
-                    const checkingTask = paraOfOutput.querySelectorAll("p")
-                    console.log(checkingTask);
-                    const task = inputOfInnerForm.value;
-                    const innerForm = document.querySelector(".innerForm")
-                    paraOfOutput.innerText = task
-                    innerForm.remove()
-                }
-            }
-        }
-    }
+    })
+    // delete event listener
+    const deletebtn = document.createElement('button');
+    deletebtn.addEventListener('click', function handleDeleteBtn(e) {
+        confirm('are you sure to delete this field');
+        divEl.remove();
+    });
+    deletebtn.innerText = 'Delete';
+    mainContainer.append(divEl);
+    divEl.append(pEl, editBtn, deletebtn);
 }
+// function handleEditBtn() {
+//     confirm('are you sure to edit this field');
+//     const task = inputText.value;
+//     inputText.innerText = task;
+// }
+// function handleDeleteBtn(val) {
+//     confirm('are you sure to delete');
+// }
+formEl.addEventListener('submit', handleEvent);
